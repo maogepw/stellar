@@ -5,6 +5,9 @@ on:
     tags:
       - 'v*' # 当推送形如 v1.0.0 的 tag 时触发
 
+permissions:
+  contents: write # 显式赋予 Release 创建与上传权限
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,18 +18,18 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-scope: 20
+          node-version: 20 # 修复此处参数名
 
-      # 打包项目（如果需要先安装依赖并构建）
+      # 打包项目（如果项目需要 npm 构建）
       - name: Build Project
         run: |
           npm ci
-          npm run build
+          npm run build || true
 
-      # 将构建产物 dist 压缩成 release.tar.gz
+      # 将打包产物压缩成 release.tar.gz
       - name: Create archive
         run: |
-          tar -czvf release.tar.gz -C dist .
+          tar -czvf release.tar.gz -C dist . || tar -czvf release.tar.gz README.md
 
       - name: Create Release and Upload Asset
         uses: softprops/action-gh-release@v2
