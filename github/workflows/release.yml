@@ -1,0 +1,30 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*' # 当推送形如 v1.0.0 的 tag 时触发
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 如果需要编译代码，可在此插入构建步骤（例如 npm run build 或 go build）
+
+      - name: Create archive
+        run: |
+          mkdir dist
+          # 将你需要打包的文件复制到 dist 目录中
+          cp -r README.md LICENSE dist/ 2>/dev/null || true
+          # 打包文件
+          tar -czvf release.tar.gz -C dist .
+
+      - name: Create Release and Upload Asset
+        uses: softprops/action-gh-release@v2
+        with:
+          files: release.tar.gz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
