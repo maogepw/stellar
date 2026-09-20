@@ -1061,6 +1061,9 @@ const messages = {
       freeOrderTip: 'This order has been reduced to 0 by balance or plan credit. Click activate to complete it.',
       balanceDiscount: 'Balance Deduction',
       surplusDiscount: 'Plan Credit',
+      surplusCredit: 'Excess credit (returned on activation)',
+      estimatedPrice: 'Estimated amount',
+      planChangeCreditHint: 'When changing plans, any enabled credit for the remaining value of your current plan is calculated after placing the order. Review the actual amount before paying.',
     },
     ticket: {
       title: 'Tickets',
