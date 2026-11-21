@@ -1,9 +1,9 @@
 # Stellar Theme
 
-[![GitHub](https://img.shields.io/badge/GitHub-aklibk86--dev%2Fstellar-181717?logo=github)](https://github.com/aklibk86-dev/stellar)
+[![GitHub](https://img.shields.io/badge/GitHub-maogepw%2Fstellar-181717?logo=github)](https://github.com/maogepw/stellar)
+[![Build and Release](https://github.com/maogepw/stellar/actions/workflows/main.yml/badge.svg)](https://github.com/maogepw/stellar/actions/workflows/main.yml)
 
-**项目仓库：** <https://github.com/aklibk86-dev/stellar>  
-**项目文档：** <https://stellar.aklibk.wiki>
+**项目仓库：** <https://github.com/maogepw/stellar>（上游：<https://github.com/aklibk86-dev/stellar>，文档：<https://stellar.aklibk.wiki>）
 
 Stellar Theme 是一套面向 XBoard 的现代化用户端主题，基于 Vue 3、TypeScript 与 Vite 构建，覆盖落地页、认证、套餐购买、订单、工单、邀请、知识库、流量统计、订阅导入和个人资料等完整功能。
 
@@ -24,7 +24,7 @@ Stellar Theme 是一套面向 XBoard 的现代化用户端主题，基于 Vue 3�
 | 用户仪表盘 | 账户概况、有效期、剩余流量、订阅复制/导入、待支付订单/工单提醒 |
 | 订阅导入 | 多平台客户端资源，支持配置下载链接 |
 | 线路与服务器 | 查看后端返回的可用线路信息 |
-| 套餐购买 | 从后端读取套餐、展示价格周期、套餐库存展示（剩余/总数，需后端补丁，见 `documentation/套餐库存显示-后端补丁.md`）、选择支付方式、提交订单 |
+| 套餐购买 | 从后端读取套餐、展示价格周期、套餐库存展示（剩余/总数，需后端补丁支持）、选择支付方式、提交订单 |
 | 订单管理 | 查看历史订单和状态，仪表盘提醒待支付订单 |
 | 工单系统 | 提交工单、查看状态，控制台提醒待处理工单 |
 | 邀请与返利 | 邀请链接、记录及佣金数据 |
@@ -35,32 +35,44 @@ Stellar Theme 是一套面向 XBoard 的现代化用户端主题，基于 Vue 3�
 
 ## 技术栈
 
-| 技术 | 用途 |
-| --- | --- |
-| Vue 3 | 前端应用框架 |
-| TypeScript | 静态类型检查 |
-| Vite | 开发服务器与构建 |
-| Vue Router | 前端路由 |
-| Pinia | 状态管理 |
-| Naive UI | UI 组件库 |
-| Axios | HTTP 请求 |
-| Vue I18n | 国际化 |
-| ECharts / Vue ECharts | 图表展示 |
-| Tailwind CSS / PostCSS / Sass | 样式工具链 |
-| DOMPurify | HTML 内容安全净化 |
+版本以 [`package.json`](package.json) 为准，下表为 v1.1.0 锁定的主要版本。
+
+| 技术 | 版本 | 用途 |
+| --- | --- | --- |
+| Vue | 3.5.x | 前端应用框架 |
+| TypeScript | ~5.9 | 静态类型检查 |
+| vue-tsc | 3.3.x | 构建前 Vue SFC 类型检查 |
+| Vite | 7.3.x | 开发服务器与构建 |
+| Vue Router | 4.6.x | 前端路由 |
+| Pinia | 2.3.x | 状态管理 |
+| Naive UI | 2.44.x | UI 组件库 |
+| Axios | 1.21.x | HTTP 请求 |
+| Vue I18n | 11.4.x | 国际化 |
+| ECharts / Vue ECharts | 6.1.x / 8.3.x | 图表展示 |
+| Tailwind CSS / PostCSS / Sass | 3.4.x / 8.5.x / 1.101.x | 样式工具链 |
+| DOMPurify | 3.4.x | HTML 内容安全净化 |
 
 ## 环境要求
 
-- Node.js 20 LTS+
-- npm 10+
+- **Node.js 24 LTS**（推荐；`.nvmrc` 已固定为 `24`，GitHub Actions 也按该文件安装）
+- npm 11+（随 Node 24 分发）
 - 可正常访问的 XBoard 后端 API
 - 生产部署推荐 Nginx
+
+版本策略：
+
+| Node 版本 | 状态 | 说明 |
+| --- | --- | --- |
+| 20 | 已 EOL（2026-04-30） | 不再收到安全更新，v1.1.0 起不再作为构建目标 |
+| 22 | 维护中（EOL 2027-04-30） | 最低可用版本，`engines` 允许 `^20.19.0 || >=22.12.0` |
+| **24** | **维护 LTS（安全更新至 2028-04-30）** | **本地与 CI 统一使用** |
+| 26 | Active LTS | 可正常使用，CI 暂不切换以保证产物稳定 |
 
 查看版本：
 
 ```bash
-node -v
-npm -v
+node -v   # 期望 v24.x
+npm -v    # 期望 11.x
 ```
 
 ## 快速开始
@@ -68,8 +80,9 @@ npm -v
 ### 1. 获取项目
 
 ```bash
-git clone https://github.com/aklibk86-dev/stellar.git
+git clone https://github.com/maogepw/stellar.git
 cd stellar
+nvm use   # 读取 .nvmrc 切到 Node 24；Windows 可用 fnm/volta，或手动安装 Node 24
 ```
 
 ### 2. 安装依赖
@@ -117,6 +130,7 @@ npm run preview
 | `npm run dev` | 启动开发服务器 |
 | `npm run build` | 类型检查并构建 |
 | `npm run preview` | 预览构建产物 |
+| `npm run deps:check` | 依赖安全审计（high 及以上级别即失败） |
 
 ## 配置说明
 
@@ -132,7 +146,7 @@ window.settings = {
   description: 'Stellar Panel',
   assets_path: '/assets',
   theme: { color: 'default' },
-  version: '1.0.0',
+  version: '1.1.0',
   background_url: '',
   logo: '',
   landing_theme_mode: 'dark',
@@ -481,7 +495,10 @@ stellar/
 │  ├─ views/          # 页面视图
 │  ├─ App.vue
 │  └─ main.ts
-├─ nginx.conf.example # Nginx 配置示例
+├─ scripts/            # env.js 校验与生成脚本
+├─ .github/workflows/  # GitHub Actions 构建发布流水线
+├─ .nvmrc              # 锁定 Node 大版本（24）
+├─ vite.config.ts      # 构建与多入口配置
 └─ package.json
 ```
 
@@ -510,7 +527,17 @@ stellar/
 - 生产环境使用 HTTPS，并在响应头设置 `Content-Security-Policy: frame-ancestors 'none'` 禁止 iframe 嵌入（该指令**只能通过 HTTP 响应头生效**，写在 index.html 的 `<meta>` 中会被浏览器忽略）
 - 不在前端配置文件中存放敏感信息
 - 后端 CORS 限制来源，优先使用同域转发
-- 定期执行 `npm audit` 检查依赖安全
+- 每次发布前执行 `npm run deps:check`（等价于 `npm audit --audit-level=high`），CI 同样强制执行，存在 high/critical 漏洞时流水线直接失败
+- 依赖升级按 `npm audit fix` → 人工确认 major 版本 → 完整构建验证三步走，不要一次性跨大版本
+
+## 前端署名说明
+
+自 v1.1.0 起，界面不再携带作者版权与 GitHub 署名：
+
+- 侧边栏底部（`src/layouts/sidebar/SidebarFooter.vue`）只显示站点名称与版本号，配置了 `env.js` 的 `telegram_group` 时才追加 TG 群组入口
+- 落地页页脚（`src/views/Landing.vue`）同理，只在配置了 `telegram_group` 时显示 TG 入口
+- 已删除 `landing.allRightsReserved` 国际化词条与 `.footer-copyright` 样式规则
+- 上游出处仅保留在本 README，不占用界面位置
 
 ## 开发说明
 
@@ -519,14 +546,61 @@ stellar/
 - 新增页面需在 `src/router/index.ts` 注册路由
 - 修改运行时配置需同步更新 `src/env.d.ts` 和 `src/utils/settings.ts`
 
+## 版本与发布
+
+本项目由 GitHub Actions 构建并发布，工作流为 `.github/workflows/main.yml`。
+
+流水线步骤（任一步失败即中止，不会再把失败产物发出去）：
+
+1. `actions/checkout@v7` 拉取代码
+2. `actions/setup-node@v7` 按 `.nvmrc` 安装 Node 24 的最新补丁版（`check-latest: true`）并启用 npm 缓存
+3. `npm ci` 按 `package-lock.json` 精确安装
+4. `npm audit --audit-level=high` 依赖安全闸门
+5. `npm run build`：先 `vue-tsc -b` 类型检查，再 `vite build`（构建失败 = 流水线失败）
+6. 校验 `dist/index.html`、`dist/env.js` 与哈希 JS 产物确实存在
+7. 打包 `stellar-dist.tar.gz` 与 `stellar-dist.zip`
+8. 标签触发时用 `softprops/action-gh-release@v3` 创建 Release 并上传两个压缩包，`generate_release_notes: true` 自动生成 Release 说明
+
+发布新版本：
+
+```bash
+# 1. 本地先过一遍审计与构建
+npm ci && npm run deps:check && npm run build
+
+# 2. 同步版本号：package.json、index.html、src/stores/app.ts、public/env.js.example
+
+# 3. 提交并推送 v* 标签，触发构建发布
+git add -A
+git commit -m "chore(release): v1.1.0"
+git tag -a v1.1.0 -m "v1.1.0"
+git push origin main --follow-tags
+```
+
+推送 `v*` 标签即创建 Release；在 Actions 页面手动运行（`workflow_dispatch`）只做构建校验，产物以 artifact 形式保留，不会创建 Release。Release 资产上传使用内置 `GITHUB_TOKEN`，工作流已声明 `permissions: contents: write`。
+
+## 更新日志
+
+### v1.1.0
+
+- **运行时**：CI 与本地统一到 Node 24 LTS（Node 20 已于 2026-04-30 EOL），新增 `.nvmrc` 与 `engines` 约束
+- **依赖安全**：`npm audit` 由 21 项（13 high / 7 moderate / 1 low）降为 0；axios → 1.21.1、dompurify → 3.4.18、echarts → 6.1.0 与 vue-echarts → 8.3.x、vite → 7.3.x、typescript → ~5.9、vue-tsc → 3.3.x、vue → 3.5.46、naive-ui → 2.44.x 等
+- **CI/发布**：`actions/checkout@v7`、`actions/setup-node@v7`、`actions/upload-artifact@v7`、`softprops/action-gh-release@v3`；移除 `npm run build || true` 的静默失败；新增审计闸门与产物校验；同时提供 tar.gz 与 zip 资产
+- **前端**：移除侧边栏与落地页的作者版权与署名（见「前端署名说明」）
+- **文档**：环境要求、技术栈版本、发布流程、项目结构与失效引用同步修订
+
+### v1.0.0
+
+- 初始版本：XBoard / v2board 双后端 Vue 3 主题
+
 ## 发布检查清单
 
 - [ ] 已执行 `npm ci`
+- [ ] 已执行 `npm run deps:check`，无 high/critical 漏洞
 - [ ] 已配置正确的 API 地址
 - [ ] 已修改站点标题、Logo 和联系链接
 - [ ] 已清理示例客户端下载地址
-- [ ] 已执行 `npm run build`
-- [ ] 已上传 `dist/` 全部文件
+- [ ] 已执行 `npm run build` 且类型检查通过
+- [ ] 已上传 `dist/` 全部文件，或直接使用 Release 资产
 - [ ] 已配置 SPA 路由回退
 - [ ] 已禁用 `env.js` 长期缓存
 - [ ] 已验证注册、登录、套餐、订单和订阅流程
@@ -534,8 +608,8 @@ stellar/
 
 ## 项目地址
 
-- GitHub：<https://github.com/aklibk86-dev/stellar>
-- 作者：[@aklibk86-dev](https://github.com/aklibk86-dev)
+- GitHub（本仓库）：<https://github.com/maogepw/stellar>
+- 上游项目：[@aklibk86-dev](https://github.com/aklibk86-dev) 的 <https://github.com/aklibk86-dev/stellar>，文档 <https://stellar.aklibk.wiki>
 - Telegram：<https://t.me/kqxw_chat>
 
 > 当前源码未提供许可证文件，商用前请确认授权范围。
