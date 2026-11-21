@@ -580,13 +580,17 @@ git push origin main --follow-tags
 
 ## 更新日志
 
-### v1.1.0
+### v1.1.0（本仓库首个发布，上游之后）
 
 - **运行时**：CI 与本地统一到 Node 24 LTS（Node 20 已于 2026-04-30 EOL），新增 `.nvmrc` 与 `engines` 约束
 - **依赖安全**：`npm audit` 由 21 项（13 high / 7 moderate / 1 low）降为 0；axios → 1.21.1、dompurify → 3.4.18、echarts → 6.1.0 与 vue-echarts → 8.3.x、vite → 7.3.x、typescript → ~5.9、vue-tsc → 3.3.x、vue → 3.5.46、naive-ui → 2.44.x 等
 - **CI/发布**：`actions/checkout@v7`、`actions/setup-node@v7`、`actions/upload-artifact@v7`、`softprops/action-gh-release@v3`；移除 `npm run build || true` 的静默失败；新增审计闸门与产物校验；同时提供 tar.gz 与 zip 资产
 - **前端**：移除侧边栏与落地页的作者版权与署名（见「前端署名说明」）
 - **文档**：环境要求、技术栈版本、发布流程、项目结构与失效引用同步修订
+
+### v1.0.1
+
+- 上游最后一版（2026-10-04 由 Actions 构建发布），运行时仍停留在 Node 20
 
 ### v1.0.0
 
