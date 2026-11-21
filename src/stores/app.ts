@@ -38,7 +38,7 @@ export const useAppStore = defineStore('app', () => {
   const themeColor = ref<ThemeColor>('default')
   const title = ref('Stellar')
   const logo = ref('')
-  const version = ref('1.0.0')
+  const version = ref('1.1.0')
   const backgroundUrl = ref('')
   const description = ref('')
 
@@ -89,7 +89,7 @@ export const useAppStore = defineStore('app', () => {
     if (window.settings) {
       title.value = window.settings.title || 'Stellar'
       logo.value = window.settings.logo || ''
-      version.value = window.settings.version || '1.0.0'
+      version.value = window.settings.version || '1.1.0'
       backgroundUrl.value = window.settings.background_url || ''
       description.value = window.settings.description || ''
       defaultThemeMode.value = window.settings.landing_theme_mode === 'light' ? 'light' : 'dark'
