@@ -641,7 +641,6 @@ const messages = {
       faq4A: '适合日常网页访问、远程办公、资料查询、在线视频和游戏连接优化等网络使用场景。',
       ctaTitle: '开启更顺畅的网络体验',
       ctaSubtitle: '注册账号，选择套餐，一键导入客户端，即刻连接可用服务线路。',
-      allRightsReserved: '保留所有权利',
     },
     apiValidation: {
       connecting: '正在连接服务...',
@@ -1291,7 +1290,6 @@ const messages = {
       faq4A: 'It is suitable for daily browsing, remote work, research, online video, and game connection optimization.',
       ctaTitle: 'Start a Smoother Network Experience',
       ctaSubtitle: 'Register, choose a plan, import your configuration, and connect to an available service route.',
-      allRightsReserved: 'All Rights Reserved',
     },
     apiValidation: {
       connecting: 'Connecting to service...',

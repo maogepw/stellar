@@ -353,18 +353,9 @@
           </div>
           <span class="footer-name">{{ appStore.title || 'Stellar' }}</span>
         </div>
-        <div class="footer-meta">
-          <p class="footer-copyright">
-            Copyright © {{ new Date().getFullYear() }}
-            <a :href="authorUrl" target="_blank" rel="noopener noreferrer">{{ authorName }}</a>.
-            {{ t('landing.allRightsReserved') }}
-          </p>
+        <div v-if="telegramGroupUrl" class="footer-meta">
           <div class="footer-links">
-            <a :href="authorUrl" target="_blank" rel="noopener noreferrer" aria-label="GitHub 项目仓库">GitHub</a>
-            <template v-if="telegramGroupUrl">
-              <span>·</span>
-              <a :href="telegramGroupUrl" target="_blank" rel="noopener noreferrer" aria-label="Telegram 群组">TG 群组</a>
-            </template>
+            <a :href="telegramGroupUrl" target="_blank" rel="noopener noreferrer" aria-label="Telegram 群组">TG 群组</a>
           </div>
         </div>
       </div>
@@ -488,12 +479,6 @@ const closeMobileMenuOnOutsideClick = (event: MouseEvent) => {
 const closeMobileMenuOnEscape = (event: KeyboardEvent) => {
   if (event.key === 'Escape') mobileMenuOpen.value = false
 }
-
-// 保留作者署名是开源社区的基本礼仪，请勿移除或篡改版权信息。
-const _a = [97, 107, 108, 105, 98, 107, 56, 54, 45, 100, 101, 118]
-const _u = [104, 116, 116, 112, 115, 58, 47, 47, 103, 105, 116, 104, 117, 98, 46, 99, 111, 109, 47, 97, 107, 108, 105, 98, 107, 56, 54, 45, 100, 101, 118, 47, 115, 116, 101, 108, 108, 97, 114]
-const authorName = computed(() => String.fromCharCode(..._a))
-const authorUrl = computed(() => String.fromCharCode(..._u))
 
 const toggleLang = () => {
   const newLocale = locale.value === 'zh-CN' ? 'en-US' : 'zh-CN'
